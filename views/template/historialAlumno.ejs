@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+    <%include ../nav%>
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui text container" style="padding-top:15px;">
+                <h1 class="ui center aligned header"> Resultados del Alumno</h1>         
+            </div>
+            
+            <div class="ui text container">
+                <div class="ui segments">
+                <%if(message.length>0){%>
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                            <div class="header">
+                                <%=message%>
+                            </div>
+                        </div>
+                    <%} else if(er.length>0){%>
+                        <div class="ui negative message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=er%>
+                            </div>
+                        </div>
+                    <%}%>
+                    <form id=histoForm class="ui form" method="post" action="/<%=data.MATERICULA%>/calificaciones">
+                        <div class="ui segment">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label class="ui blue label">Matricula *</label>
+                                    <input tyep="text" name="histoMatricula" id="histoMatricula" placeholder="Matricula" value="<%=data.MATERICULA%>" disabled/>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label">SEMESTRE *</label>
+                                    <select id="histoSemestre" name="histoSemestre" class="ui fluid search dropdown">
+                                        <option value="">SEMESTRE ACTUAL</option>
+                                        <%if (data.SEMESTRES.length > 0) {%>
+                                            <%for (var s = 0; s < data.SEMESTRES.length; s++) {%>
+                                                <option value="<%=data.SEMESTRES[s].ID%>"><%=data.SEMESTRES[s].SEMESTRE%></option>
+                                            <%}%>
+                                        <%}%>
+                                    </select>
+                                </div>
+                            </div>
+                            <input tyep="text" hidden name="histoAlumno" id="histoAlumno" placeholder="Matricula" value="<%=data.SEMESTRES[0].A_ID%>"/>
+                            <div class="inline field">
+                                <div class="ui fluid large blue submit button">Mostrar Calificaciones</div>
+                            </div>
+                            <div class="ui message error"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="ui segment">
+                        <table class="ui celled center aligned table">
+                            <thead>
+                                <th>Materia</th>
+                                <th>Primer Parcial</th>
+                                <th>Segundo Parcial</th>
+                                <th>Tercer Parcial</th>
+                                <th>Total</th>
+                                <th>Paso</th>
+                                <th>Siglas</th>
+                                <th>Comentario</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+        </div>
+    </div>
+<footer></footer>
+</body>
+</html>

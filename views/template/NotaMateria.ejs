@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <%include ../nav%>
+    
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui container" style="padding-top: 15px;">
+                <h1 class="ui center aligned header">Asignar Calificación</h1>
+            </div>
+            <div class="ui text container">
+                <div class="ui segments">
+                    <%if(message.length>0){%>
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            <%=message%>
+                        </div>
+                    </div>
+                    <%} else if(er.length>0){%>
+                    <div class="ui negative message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            <%=er%>
+                        </div>
+                    </div>
+                    <%}%>
+                    <form id="notaMaestroForm" name="notaMaestroForm" class="ui form blue" method="post" action="/grupoCalificado">
+                        <!---INFORMACIÓN DEL MAESTRO QUE REALIZA LA OPERACIÓN--->
+                        <div class="three fields">
+                            <div class="field">
+                                <div class="ui segment">
+                                    <label class="ui blue label">Matricula</label>
+                                    <div class="ui yellow message centered"><%=user.usuario%></div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui segment">
+                                    <label class="ui blue label">Role</label>
+                                    <div class="ui yellow message"><%=user.role%></div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui segment">
+                                    <label class="ui blue label">Nombre</label>
+                                    <div class="ui yellow message"><%=user.nombre%></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!----INFORMACIÓN DE LA MATERIA, TURNO Y DEL CICLO EN LA QUE SE VA A VER REFLEJADA LA NOTA JIJI t(n.n't)---->
+                        <div class="three fields">
+                            <div class="field">
+                                <div class="ui segment">
+                                    <label class="ui blue label">Ciclo</label>
+                                    <select id="notaMaestroCiclo" name="notaMaestroCiclo" class="ui fluid search dropdown">
+                                        <option value="">CICLOS</option>
+                                        <%for (var c = 0; c < data.CICLOS.length; c++) {%>
+                                            <%if (data.DEFAULTS[0].CICLO_ID === data.CICLOS[c].ID) {%>
+                                            <option value="<%=data.CICLOS[c].ID%>" selected><%=data.CICLOS[c].CODIGO%></option>
+                                            <% break; }%>
+                                        <%}%>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui segment">
+                                    <div class="ui yellow message">Materia: <%=data.DEFAULTS[0].MATERIA%></div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui segment">
+                                    <div class="ui yellow message">Turno: <%=data.DEFAULTS[0].TURNO%></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="ui center aligned header">Alumnos</h1>
+                        <!--- LISTA DE LOS ALUMNOS A LOS QUE SE LE VA A DAR NOTA t(n.nt) --->
+                        <%for (var a = 0; a < data.DEFAULTS.length; a++) {%>
+                            <input type="text" hidden value="<%=data.DEFAULTS[a].MHM_ID%>" name="MHM_ID[<%=a%>]"/>
+                            <input type="text" hidden value="<%=data.DEFAULTS[a].ID%>" name="notaMaestroID[<%=a%>]"/>
+                            <div class="ui segment">
+                            <div class="three fields">
+                                <div class="field">
+                                    <label class="ui yellow label">Matricula</label>
+                                    <div class="ui blue message"><%=data.DEFAULTS[a].MATRICULA%></div>
+                                </div>
+                                <div class="field">
+                                    <label class="ui yellow label">Nombre</label>
+                                    <div class="ui blue message"><%=data.DEFAULTS[a].NOMBRE%></div>
+                                </div>
+                                <div class="field">
+                                    <label class="ui yellow label">Semestre</label>
+                                    <div class="ui blue message"><%=data.DEFAULTS[a].SEMESTRE%></div>
+                                </div>
+                            </div>
+                            <div class="three fields">
+                                <div class="field">
+                                    <label class="ui blue label">Primer Parcial</label>
+                                    <input type="number" min="1" max="100" name="notaMaestroPrimerParcial[<%=a%>]" id="notaMaestroPrimerParcial[<%=a%>]" placeholder="CALIFICACION 100.00"/>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label">Segundo Parcial</label>
+                                    <input type="number" min="1" max="100" name="notaMaestroSegundoParcial[<%=a%>]" id="notaMaestroSegundoParcials[<%=a%>]" placeholder="CALIFICACION 100.00"/>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label">Tercer Parcial</label>
+                                    <input type="number" min="1" max="100" name="notaMaestroTercerParcial[<%=a%>]" id="notaMaestroTercerParcial[<%=a%>]" placeholder="CALIFICACION 100.00"/>
+                                </div>
+                            </div>
+                            <div class="three fields">
+                                <div class="two fields">
+                                    <div class="field">
+                                        <div class="ui slider checkbox">
+                                            <input type="radio" name="notaMaestroPaso[<%=a%>]" value="1" checked="checked">
+                                            <label>Paso</label>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="ui slider checkbox">
+                                            <input type="radio" name="notaMaestroPaso[<%=a%>]" value="0">
+                                            <label>NO Paso</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field">
+
+                                    <label class="ui blue label">Siglas</label>
+                                    <select id="intpuCicloCarrera" class="ui fluid search dropdown" name="notaMaestroSiglas[<%=a%>]">
+                                        <option value="">SIGLAS</option>
+                                        <option value="O">O.- Ordinario</option>
+                                        <option value="E">E.- Extra ordinario</option>
+                                        <option value="R">R.- Reprobado</option>
+                                        <option value="SN">SN.- Sin Derecho</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label class="ui yellow label">Comentarios</label>
+                                    <input type="text" name="notaMaestroComentario[<%=a%>]" placeholder="Explicar motivo de las siglas" />
+                                </div>
+                            </div>
+                            </div>
+                        <%}%>
+                        <input hidden name="turnoId" value="<%=data.DEFAULTS[0].TURNO_ID%>"/>
+                        <input hidden name="carreraId" value="<%=data.DEFAULTS[0].CARRERA%>"/>
+                        <input hidden name="materiaId" value="<%=data.DEFAULTS[0].MATERIA_ID%>"/>
+                        <input hidden name="semestreId" value="<%=data.DEFAULTS[0].SEMESTRE_ID%>"/>
+                        <div id="Updatetsubmit" class="inline field">
+                            <div id="notaMaestroSubmit" class="ui fluid large blue submit button">Registrar</div>
+                        </div>
+                        <div class="ui message error"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <%include ../footer%>
+    </footer>
+</body>
+
+
+</html>

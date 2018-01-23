@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+    <%include ../nav%>
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui text container" style="padding-top:15px;">
+                <h1 class="ui center aligned header">Asignar Materias al Maestro</h1>
+            </div>
+            
+            <div class="ui text container">
+                <div class="ui segments">
+                <%if(message.length>0){%>
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                            <div class="header">
+                                <%=message%>
+                            </div>
+                        </div>
+                    <%} else if(er.length>0){%>
+                        <div class="ui negative message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=er%>
+                            </div>
+                        </div>
+                    <%}%>
+                    <form id="asignarForm" class="ui form" method="post" action="/postAsignar">
+                        <div class="ui segment">
+                            <input type="text" hidden id="P_ID" name="P_ID" value="<%=data.MAESTRO[0].P_ID%>" />
+                            <div class="two fields">
+                                <div class="field">
+                                    <div class="ui segment">
+                                        <label class="ui yellow label">Num. Empleado</label>
+                                        <input tyep="text" name="maestroNum" id="maestroNum" placeholder="Numero de Empleado" value="<%=data.MAESTRO[0].MATRICULA%>" disabled />
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui segment">
+                                        <label class="ui yellow label">Nombre</label>
+                                        <input tyep="text" name="maestroNombre" id="maestroNombre" placeholder="Nombre" value="<%=data.MAESTRO[0].NOMBRE%>" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="text" hidden id="M_ID" name="M_ID" value="<%=data.MAESTRO[0].M_ID%>" />
+                            <div class="two fields">
+                                <div class="field">
+                                    <label id="turnoLabel" name="turnoLabel" class="ui blue label">Turno *</label>
+                                    <div disabled class="ui selection dropdown">
+                                        <input id="asignarTurno" type="hidden" name="asignarTurno">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">Turno</div>
+                                        <div class="menu">
+                                            <%for (var i = 0; i<data.TURNOS.length; i++) {%>
+                                            <div class="item" data-value="<%=data.TURNOS[i].ID%>">
+                                                <%=data.TURNOS[i].NOMBRE%>
+                                            </div>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="fieldSemestre" class="field">
+                                    <label id="semestreLabel" class="ui blue label">Semestre *</label>
+                                    <div class="ui selection dropdown">
+                                        <input id="asignarSemestre" type="hidden" name="asignarSemestre">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">Semestre</div>
+                                        <div class="menu">
+                                            <%for (var i = 0; i < data.SEMESTRES.length; i++) {%>
+                                            <div class="item" data-value="<%=data.SEMESTRES[i].ID%>">
+                                                <%=data.SEMESTRES[i].NOMBRE%> MESES (
+                                                <%=data.SEMESTRES[i].MESES%>)</div>
+                                            <%}%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="materiaSelect" class="field">
+                                <label id="semestreLabel" class="ui blue label">Materias *</label>
+                                <select class="ui fluid search dropdown" multiple="" name="asignarMaterias" id="asignarMaterias">
+                                    <option value="">MATERIAS</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="Updatetsubmit" class="inline field">
+                            <div class="ui fluid large blue submit button">Registrar</div>
+                        </div>
+                        <div class="ui message error"></div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer></footer>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <%include ../nav%>
+    
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui container" style="padding-top: 15px;">
+                <h1 class="ui center aligned header">Detalles Calificación</h1>
+            </div>
+            <div class="ui text container">
+                <div class="ui segments">
+                    <%if(message.length>0){%>
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            <%=message%>
+                        </div>
+                    </div>
+                    <%} else if(er.length>0){%>
+                    <div class="ui negative message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            <%=er%>
+                        </div>
+                    </div>
+                    <%}%>
+                    <form id="notaEditarMaestroForm" name="notaEditarMaestroForm" class="ui form blue">
+                        <!---INFORMACIÓN DEL MAESTRO QUE REALIZA LA OPERACIÓN--->
+                        <div class="three fields">
+                            <div class="field">
+                                <div class="ui segment">
+                                    <label class="ui blue label">Matricula</label>
+                                    <div class="ui yellow message centered"><%=user.usuario%></div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui segment">
+                                    <label class="ui blue label">Role</label>
+                                    <div class="ui yellow message"><%=user.role%></div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui segment">
+                                    <label class="ui blue label">Nombre</label>
+                                    <div class="ui yellow message"><%=user.nombre%></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!----INFORMACIÓN DE LA MATERIA, TURNO Y DEL CICLO EN LA QUE SE VA A VER REFLEJADA LA NOTA JIJI t(n.n't)---->
+                        <div class="three fields">
+                            <div class="field">
+                                <div class="ui segment">
+                                    <label class="ui blue label">Ciclo</label>
+                                    <select id="notaMaestroCiclo" disabled name="notaMaestroCiclo" class="ui fluid search dropdown">
+                                        <option value="">CICLOS</option>
+                                        <%for (var c = 0; c < data.CICLOS.length; c++) {%>
+                                            <%if (data.DEFAULTS[0].CICLO_ID === data.CICLOS[c].ID) {%>
+                                            <option value="<%=data.CICLOS[c].ID%>" selected><%=data.CICLOS[c].CODIGO%></option>
+                                            <% break; }%>
+                                        <%}%>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui segment">
+                                    <div class="ui yellow message">Materia: <%=data.DEFAULTS[0].MATERIA%></div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui segment">
+                                    <div class="ui yellow message">Turno: <%=data.DEFAULTS[0].TURNO%></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        <div class="ui container" style="padding-top: 15px;">
+                <table class="ui celled center aligned table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Matricula</th>
+                            <th>Nombre</th>
+                            <th>Semestre</th>
+                            <th>Primer Parcial</th>
+                            <th>Segundo Parcial</th>
+                            <th>Tercer Parcial</th>
+                            <th>Total</th>
+                            <th>Paso</th>
+                            <th>Siglas</th>
+                            <th>Comentario</th>
+                        </thead>
+                        <tbody>
+                            <%for (var a = 0; a < data.DEFAULTS.length; a++) {%>
+                            <tr>
+                                <td><%=data.DEFAULTS[a].CALIFICACION_ID%></td>
+                                <td><%=data.DEFAULTS[a].MATRICULA%></td>
+                                <td><%=data.DEFAULTS[a].NOMBRE%></td>
+                                <td><%=data.DEFAULTS[a].SEMESTRE%></td>
+                                <td><%=data.DEFAULTS[a].PSEMESTRE%></td>
+                                <td><%=data.DEFAULTS[a].SSEMESTRE%></td>
+                                <td><%=data.DEFAULTS[a].TSEMESTR%></td>
+                                <td><%=data.DEFAULTS[a].TOTAL%></td>
+                                <%if (data.DEFAULTS[a].PASO === 1) {%> <td>SI</td><%} else {%><td>NO</td><%}%>
+                                <td><%=data.DEFAULTS[a].SIGLAS%></td>
+                                <td><%=data.DEFAULTS[a].SIGNIFICADO%></td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
+            </div>
+    </div>
+    
+    <footer>
+        <%include ../footer%>
+    </footer>
+</body>
+
+
+</html>

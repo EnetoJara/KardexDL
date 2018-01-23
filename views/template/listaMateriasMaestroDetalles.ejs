@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <%include ../nav%>
+
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui text container">
+                <div class="ui container" style="padding-top:15px;padding-bottom:15px;">
+                    <h1 class="ui center aligned header">Selecciona Carrera</h1>
+                </div>
+                <div class="ui text container">
+                    <div class="ui segments">
+                        <%if(message.length>0) {%>
+                        <div class="ui info message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=message%>
+                            </div>
+                        </div>
+                        <%} else if(er.length>0){%>
+                        <div class="ui negative message">
+                            <i class="close icon"></i>
+                            <div class="header"><%=er%></div>
+                        </div>
+                        <%}%>
+                        <form id="calificarForm" class="ui form blue" method="post" action="/detalleListaMateras">
+                            <div class="three fields">
+                                <div class="field">
+                                   
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label">Carrera *</label>
+                                    <select id="calificarCarrera" class="ui fluid search dropdown" name="calificarCarrera">
+                                        <option value="">CARRERAS</option>
+                                        <%if (data.CARRERAS.length > 0) {%>
+                                        <%for (var c = 0; c < data.CARRERAS.length; c++) {%>
+                                        <option value="<%=data.CARRERAS[c].ID%>"><%=data.CARRERAS[c].NOMBRE%></option>
+                                        <%}%>
+                                        <%}%>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    
+                                </div>
+                            </div>
+                            <div class="inline field">
+                                 <div class="ui fluid large blue submit button">Mostrar Materias</div>
+                            </div>
+                            <div class="ui message error"></div>
+                        </form>
+                    </div>
+                    <div class="ui container" style="padding-top:15px;padding-bottom:15px;">
+                        <h1 class="ui center aligned header">Mis Materias</h1>
+                    </div>
+                    <div class="ui text container">
+                        <div class="ui segment">
+                            <table class="ui celled center aligned table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Materia</th>
+                                        <th>Turno</th>
+                                        <th>Carrera</th>
+                                        <th>Semestre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%if (data.MATERIAS.length > 0) {%>
+                                        <%for (var m = 0; m < data.MATERIAS.length; m++) {%>
+                                            <tr>
+                                                <td><a href="/<%=data.MATERIAS[m].TURNO_ID%>/detalleNota/<%=data.MATERIAS[m].ID%>"><%=data.MATERIAS[m].ID%></a></td>
+                                                <td><%=data.MATERIAS[m].MATERIA%></td>
+                                                <td><%=data.MATERIAS[m].TURNO%></td>
+                                                <td><%=data.MATERIAS[m].CARRERA%></td>
+                                                <td><%=data.MATERIAS[m].SEMESTRE%></td>
+                                            </tr>
+                                        <%}%>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <%include ../footer%>
+    </footer>
+</body>
+
+
+</html>

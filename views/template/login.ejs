@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="unedl ui image header">
+                <img class="ui centered image" src="/images/logo.png">
+                <div class="content">KardexDL</div>
+            </h2>
+
+            <form class="ui large form" id="loginForm" action="/inicio" method="post">
+                <%if(message.length>0){%>
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            <%=message%>
+                        </div>
+                    </div>
+                    <%} else if(er.length>0){%>
+                            <div class="ui negative message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=er%>
+                                </div>
+                            </div>
+                    <%}%>
+                        <div class="ui stacked segment">
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                    <input type="text" name="username" id="nombre" placeholder="Matricula" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="lock icon"></i>
+                                    <input type="password" name="password" placeholder="Contraseña" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="ui fluid large blue submit button">Login</div>
+                        </div>
+                        <div class="ui message error"></div>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <%include ../footer%>
+    </footer>
+</body>
+
+</html>

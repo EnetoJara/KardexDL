@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+    <%include ../nav%>
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui text container" style="padding-top:15px;">
+                <h1 class="ui center aligned header">Buscar Control Escolar<br/>Para <%=user.carrera%></h1>
+            </div>
+            
+            <div class="ui text container">
+                <div class="ui segments">
+                <%if(message.length>0){%>
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                            <div class="header">
+                                <%=message%>
+                            </div>
+                        </div>
+                    <%} else if(er.length>0){%>
+                        <div class="ui negative message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=er%>
+                            </div>
+                        </div>
+                    <%}%>
+                    <form id="maestroForm" class="ui form" method="post" action="/listaControl">
+                        <div class="ui segment">
+                            <div class="three fields">
+                                <div class="field">
+                                    <label class="ui yellow label">Num. Empleado</label>
+                                    <input tyep="text" name="maestroNum" id="maestroNum" placeholder="Numero de Empleado"/>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label">Nombre *</label>
+                                    <input tyep="text" name="maestroNombre" id="maestroNombre" placeholder="Nombre"/>
+                                </div>
+                                <div class="field">
+                                    <label class="ui yellow label">Apellido</label>
+                                    <input tyep="text" name="maestroApellido" id="maestroApellido" placeholder="Apellido"/>
+                                </div>
+                            </div>
+                            <div class="inline field">
+                                <div class="ui fluid large blue submit button">Buscar</div>
+                            </div>
+                            <div class="ui message error"></div>
+                        </div>
+                    </form>
+                    <div class="ui segment">
+                        <table class="ui celled center aligned table">
+                            <thead>
+                                <th>Empleado</th>
+                                <th>Nombre</th>
+                                <th>Segundo</th>
+                                <th>Paterno</th>
+                                <th>Materno</th>
+                                <th>ACCIONES</th>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<footer></footer>
+</body>
+</html>

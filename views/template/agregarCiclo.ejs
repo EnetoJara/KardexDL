@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+    <%include ../nav%>
+        <div class="pusher" style="background-color: #DADADA">
+            <div class="pusher" style="background-color: #DADADA">
+                <div class="ui text container">
+                    <div class="ui large secondary pointing menu" style="background-color: #fff">
+                        <a class="toc item">
+                            <i class="sidebar icon"></i> MENU
+                        </a>
+                        <%include ../navegador%>
+                    </div>
+                </div>
+                <div class="ui container" style="padding-top:15px;">
+                    <h1 class="ui center aligned header">Registrar Ciclo</h1>
+                </div>
+                <div class="ui text container">
+                    <div class="ui segments">
+                        <%if(message.length>0){%>
+                            <div class="ui info message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=message%>
+                                </div>
+                            </div>
+                            <%} else if(er.length>0){%>
+                                <div class="ui negative message">
+                                    <i class="close icon"></i>
+                                    <div class="header">
+                                        <%=er%>
+                                    </div>
+                                </div>
+                                <%}%>
+                                     <form id="cicloForm" class="ui form blue" method="post" action="/registrarCiclo">
+                            <div class="two fields">
+
+                            </div>
+                            <div class="tree fields">
+                                <div class="field center">
+                                    <div class="ui segment">
+                                        <label class="ui blue label">ID Ciclo *</label>
+                                        <input id="inputIdCiclo" placeholder="ID" name="inputIdCiclo" type="text">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui segment">
+                                        <label class="ui blue label">Fecha Inicial *</label>
+                                        <input id="inputFechaIni" name="inputFechaIni" type="date">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui segment">
+                                        <label class="ui blue label">Fecha Final *</label>
+                                        <input id="inputFechaFini" name="inputFechaFini" type="date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inline field">
+                                <div class="ui fluid large blue submit button">Agregar</div>
+                            </div>
+                            <div class="ui message error"></div>
+                        </form>
+                                    <div class="ui container">
+                                        <h2 class="ui center aligned header">Lista de Ciclos</h2>
+                                    </div>
+                                    <div class="ui text container">
+                                        <div class="ui segment">
+                                            <table class="ui striped center aligned table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>CODIGO</th>
+                                                        <th>ACTIVA</th>
+                                                        <th>CREADOR/MODIFICADOR</th>
+                                                        <th>Ultima Modificación</th>
+                                                        <th>ACCIONES</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <%for (var i = 0; i<ciclos.length; i++) {%>    
+                                                    <tr>
+                                                        <td class="id"><%=ciclos[i].ID%></td>
+                                                        <td><%=ciclos[i].CODIGO%></td>
+                                                        <td><%=ciclos[i].VALIDO%></td>
+                                                        <td><%=ciclos[i].EDITOR%></td>
+                                                        <td><%=ciclos[i].MODIFICADO%></td>
+                                                       <%if (ciclos[i].VALIDO === 'Y') {%>
+                                                            <td>
+                                                                <a class="ui button basic icon btn-Eliminar-Ciclo" href='#' data-tooltip='Desactivar' data-position='top center' data-inverted=''>
+                                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                                </a>
+                                                            </td>
+                                                            <%} else {%>
+                                                            <td>
+                                                                <a class="ui button basic icon btn-Activar-Ciclo" href='#' data-tooltip='Activar' data-position='top center' data-inverted=''>
+                                                                    <i class="checkmark box icon"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <%}}%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <%include ../footer%>
+        </footer>
+</body>
+
+</html>

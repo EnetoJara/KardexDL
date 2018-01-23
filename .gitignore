@@ -1,0 +1,10 @@
+**/lib/
+**/.sass-cache/
+**/node_modules/
+**/_common/style.css.map
+**/_common/style.css
+**/*.swp
+.brackets.json
+client/_common/style.css
+**/.DS_Store
+/logs/

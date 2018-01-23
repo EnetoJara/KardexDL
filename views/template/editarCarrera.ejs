@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+    <%include ../nav%>
+        <div class="pusher" style="background-color: #DADADA">
+             <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui container" style="padding-top:15px;">
+                <h1 class="ui center aligned header">Editar Carrera</h1>
+            </div>
+            <div class="ui text container">
+                <div class="ui segments">
+                    <%if(message.length>0){%>
+                        <div class="ui info message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=message%>
+                            </div>
+                        </div>
+                        <%} else if(er.length>0){%>
+                            <div class="ui negative message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=er%>
+                                </div>
+                            </div>
+                            <%}%>
+                                <form id="carreraForm" name="carreraForm" class="ui form blue" method="post" action="/editarCarrera">
+                                    <div class="ui segment">
+                                        <input type="text" hidden name="carreraID" id="carreraID" value="<%=data.CARRERAS[0].ID%>"/>
+                                        <div class="three fields">
+                                            <div class="field">
+                                                <label class="ui blue label">Nombre *</label>
+                                                <input id="inputNombreCarrera" placeholder="Nombre Carrera" name="inputNombreCarrera" type="text" autocomplete="off" value="<%=data.CARRERAS[0].NOMBRE%>">
+                                            </div>
+                                            <div class=field>
+                                                <label class="ui blue label">Ciclo Actual</label>
+                                                <select id="intpuCicloCarrera" class="ui fluid search dropdown" name="intpuCicloCarrera">
+                                                    <option value="">CICLOS</option>
+                                                    <%if (data.CICLOS.length > 0) {%>
+                                                    <%for (var c = 0; c < data.CICLOS.length; c++) {%>
+                                                    <%if (data.CARRERAS[0].CICLO_ID === data.CICLOS[c].ID) {%>
+                                                    <option value="<%=data.CICLOS[c].ID%>" selected><%=data.CICLOS[c].NOMBRE%></option>
+                                                    <%} else {%>
+                                                        <option value="<%=data.CICLOS[c].ID%>"><%=data.CICLOS[c].NOMBRE%></option>
+                                                    <%}%>
+                                                    <%}}%>
+                                                </select>
+                                            </div>
+                                            <div class="field">
+                                                <label class="ui blue label">Modificador *</label>
+                                                <input disabled id="inputNombreCarrera" placeholder="Nombre Carrera" name="inputNombreCarrera" type="text" value="Nombre: (<%=user.nombre%>) role: (<%=user.role%>) usuario: (<%=user.usuario%>)" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Updatetsubmit" class="inline field">
+                                        <div class="ui fluid large blue submit button">Editar</div>
+                                    </div>
+                                    <div class="ui message error"></div>
+                                </form>
+
+                </div>
+            </div>
+        </div>
+        <footer>
+            <%include ../footer%>
+        </footer>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+    <%include ../nav%>
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui text container" style="padding-top:15px;">
+                <h1 class="ui center aligned header"> Resultados del Alumno</h1>         
+            </div>
+            
+            <div class="ui text container">
+                <div class="ui segments">
+                <%if(message.length>0){%>
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                            <div class="header">
+                                <%=message%>
+                            </div>
+                        </div>
+                    <%} else if(er.length>0){%>
+                        <div class="ui negative message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=er%>
+                            </div>
+                        </div>
+                    <%}%>
+                    <form id=histoForm class="ui form" method="post" action="#">
+                        <div class="ui segment">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label class="ui blue label">Matricula *</label>
+                                    <div class="ui yellow message centered"><%=data.ALUMNO.MATRICULA%></div>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label">NOMBRE *</label>
+                                    <div class="ui yellow message centered">
+                                        <%=data.ALUMNO.NOMBRE%> <%=data.ALUMNO.SNOMBRE%> <%=data.ALUMNO.APATERNO%> <%=data.ALUMNO.AMATERNO%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="ui segment">
+                        <table class="ui center aligned table">
+                            <thead>
+                                <th>Materia</th>
+                                <th>Primer Parcial</th>
+                                <th>Segundo Parcial</th>
+                                <th>Tercer Parcial</th>
+                                <th>Total</th>
+                                <th>Paso</th>
+                                <th>Siglas</th>
+                                <th>Comentario</th>
+                            </thead>
+                            <tbody>
+                            <%if (data.CALIFICIONES.length > 0) {%>
+                                <%for (var i = 0; i < data.CALIFICIONES.length-1; i++) {%>
+                                <%if (data.CALIFICIONES[i].PASO === "NO") {%>
+                                <tr class="negative">
+                                    <td><%=data.CALIFICIONES[i].MATERIA%></td>
+                                    <td><%=data.CALIFICIONES[i].PSEMESTRE%></td>
+                                    <td><%=data.CALIFICIONES[i].SSEMESTRE%></td>
+                                    <td><%=data.CALIFICIONES[i].TSEMESTR%></td>
+                                    <td><%=data.CALIFICIONES[i].TOTAL%></td>
+                                    <td><%=data.CALIFICIONES[i].PASO%></td>
+                                    <td><%=data.CALIFICIONES[i].SIGLAS%></td>
+                                    <td><%=data.CALIFICIONES[i].SIGNIFICADO%></td>
+                                </tr>
+                                <%} else {%>
+                                <tr class="positive">
+                                    <td><%=data.CALIFICIONES[i].MATERIA%></td>
+                                    <td><%=data.CALIFICIONES[i].PSEMESTRE%></td>
+                                    <td><%=data.CALIFICIONES[i].SSEMESTRE%></td>
+                                    <td><%=data.CALIFICIONES[i].TSEMESTR%></td>
+                                    <td><%=data.CALIFICIONES[i].TOTAL%></td>
+                                    <td><%=data.CALIFICIONES[i].PASO%></td>
+                                    <td><%=data.CALIFICIONES[i].SIGLAS%></td>
+                                    <td><%=data.CALIFICIONES[i].SIGNIFICADO%></td>
+                                </tr>
+                                <%}%>
+                                <%}%>
+                                 <tr>
+                                    <td><%=data.CALIFICIONES[data.CALIFICIONES.length-1].MATERIA%></td>
+                                    <td><%=data.CALIFICIONES[data.CALIFICIONES.length-1].PSEMESTRE%></td>
+                                    <td><%=data.CALIFICIONES[data.CALIFICIONES.length-1].SSEMESTRE%></td>
+                                    <td><%=data.CALIFICIONES[data.CALIFICIONES.length-1].TSEMESTR%></td>
+                                    <td><%=data.CALIFICIONES[data.CALIFICIONES.length-1].TOTAL%></td>
+                                    <td><%=data.CALIFICIONES[data.CALIFICIONES.length-1].PASO%></td>
+                                    <td><%=data.CALIFICIONES[data.CALIFICIONES.length-1].SIGLAS%></td>
+                                    <td><%=data.CALIFICIONES[data.CALIFICIONES.length-1].SIGNIFICADO%></td>
+                                </tr>
+                            <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+        </div>
+    </div>
+<footer></footer>
+</body>
+</html>

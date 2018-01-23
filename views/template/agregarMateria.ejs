@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <%include ../nav%>
+
+        <div class="pusher" style="background-color: #DADADA">
+            <div class="ui container">
+                <div class="ui text container">
+                    <div class="ui large secondary pointing menu" style="background-color: #fff">
+                        <a class="toc item">
+                            <i class="sidebar icon"></i> MENU
+                        </a>
+                        <%include ../navegador%>
+                    </div>
+                </div>
+                <!--MAIN VIEW--->
+                    <div class="ui container" style="padding-top:15px;">
+                    <h1 class="ui center aligned header">Registrar Materia</h1>
+                </div>
+                <div class="ui text container">
+                    <div class="ui segments">
+                        <%if(message.length>0){%>
+                            <div class="ui info message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=message%>
+                                </div>
+                            </div>
+                            <%} else if(er.length>0){%>
+                                <div class="ui negative message">
+                                    <i class="close icon"></i>
+                                    <div class="header">
+                                        <%=er%>
+                                    </div>
+                                </div>
+                                <%}%>
+                                    <form id="materiaForm" class="ui form" method="post" action="/registrarMateria">
+                                        <div class="three fields">
+                                            <div class="field">
+                                             <label class="ui label blue">Nombre *</label>
+                                                <input type="text" id="inputMateriaNombreForm" name="inputMateriaNombreForm" placeholder="NOMBRE"/>
+                                            </div>
+                                            
+                                                <div class="field">
+                                                    <label class="ui label blue">Semestre *</label>
+                                                    <div class="ui selection dropdown">
+                                                        <input id="selectMateriaSemestre" type="hidden" name="selectMateriaSemestre">
+                                                        <i class="dropdown icon"></i>
+                                                        <div class="default text">SEMESTRE</div>
+                                                        <div class="menu">
+                                                            <%for (var i = 0; i<semestres.length; i++) {%>
+                                                                <div class="item" data-value="<%=semestres[i].ID%>">
+                                                                    <%=semestres[i].NOMBRE%>
+                                                                </div>
+                                                                <%}%>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <div class="field">
+                                             <label class="ui label blue">Carrera *</label>
+                                                <input id="inputCarreraMateriaForm" name="inputCarreraMateriaForm" placeholder="CARRERA" type="text" value="<%=user.carrera%>" disabled/>
+                                            </div>
+                                        </div>
+                                            
+                                        <div id="Updatetsubmit" class="inline field">
+                                            <div class="ui fluid large blue submit button">Registrar</div>
+                                        </div>
+                                        <div class="ui message error"></div>
+                                    </form>
+                        <div class="ui text container">
+                            <div class="ui segment">
+                                <table class="ui celled center aligned table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>NOMBRE</th>
+                                        <th>SEMESTRE</th>
+                                        <th>CARRERA</th>
+                                        <th>ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%for (var i = 0; i < materias.length; i++) {%>
+                                        <tr>
+                                            <td class="id"><%=materias[i].ID%></td>
+                                            <td><%=materias[i].NOMBRE%></td>
+                                            <td><%=materias[i].SEMESTRE%></td>
+                                            <td><%=materias[i].CARRERA%></td>
+                                            <%if (materias[i].VALIDO === 'Y') {%>
+                                                <td class="positive">
+                                                    <a class="ui button basic icon btnMateriaEliminar" href='#' data-tooltip='Desactivar' data-position='top center' data-inverted=''>
+                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    </a>
+                                                    <a class="ui button basic icon" href='/editarMateria/<%=materias[i].ID%>' data-tooltip='Editar' data-position='top center' data-inverted=''>
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    </a>
+                                                </td>
+                                            <%} else {%>
+                                                <td class="negative">
+                                                    <a class="ui button basic icon btnMateriaActivar" href='#' data-tooltip='Activar' data-position='top center' data-inverted=''>
+                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                    </a>
+                                                </td>
+                                        </tr>
+                                        <%}}%>
+                                </tbody>
+                            </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <%include ../footer%>
+        </footer>
+</body>
+
+
+</html>

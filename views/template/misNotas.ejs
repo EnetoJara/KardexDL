@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <%include ../nav%>
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="pusher" style="background-color: #DADADA">
+            <%if (user.role === 'ALUMNO') {%>
+            <div class="ui two columns centered grid">
+                <div class="column">
+                    <div class="ui large secondary pointing menu" style="background-color: #fff">
+                        <a class="toc item"><i class="sidebar icon"></i> MENU</a>
+                        <%include ../navegador%>
+                    </div>
+                </div>
+            </div>
+            <%} else {%>
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <%}%>
+            <div class="ui text container" style="padding-top:15px;padding-bottom:15px;">
+                <h1 class="ui center aligned header">Resultados del semestre</h1>
+            </div>
+            <div class="ui text container">
+                <div class="ui segments">
+                    <div class="ui segment">
+                        <%if(message.length>0) {%>
+                        <div class="ui info message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=message%>
+                            </div>
+                        </div>
+                        <%} else if(er.length>0){%>
+                        <div class="ui negative message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=er%>
+                            </div>
+                        </div>
+                        <%}%>
+                        <form id="misNotasForm" class="ui form" method="post" action="/verMisCalificaciones">
+                            <input type="text" hidden value="<%=user.nombre%>" name="Nom"/>
+                            <div class="three fields">
+                                <div class="field">
+                                    <label class="ui blue label"> Nombre *</label>
+                                    <div class="ui yellow message centered"><%=user.nombre%></div>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label"> Matricula *</label>
+                                    <div class="ui yellow message centered"><%=user.usuario%></div>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label"> Role *</label>
+                                    <div class="ui yellow message centered"><%=user.role%></div>
+                                </div>
+                            </div>
+                            <button id="misNotaSubmit" class="ui fluid large blue submit button">Buscar</button>
+                        </form>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <%include ../footer%>
+    </footer>
+    </body>
+
+
+</html>

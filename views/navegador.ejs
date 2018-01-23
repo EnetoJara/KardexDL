@@ -1,0 +1,200 @@
+<a class="item" aria-hidden="true" href="/inicio">
+    <i class="fa fa-home" aria-hidden="true"></i>
+</a>
+<!-- If the user is an ADMIN this is the menu the app will show -->
+<%if (user.role === 'ADMIN') {%>
+<div class="ui dropdown item">
+    <i class="fa fa-university" aria-hidden="true"> Carrera</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/registrarCarrera">
+            <i class="fa fa-cogs" aria-hidden="true"> Gestionar</i>
+        </a>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-calendar" aria-hidden="true"> Ciclo Escolar</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/registrarCiclo">
+            <i class="fa fa-cogs" aria-hidden="true"> Gestionar</i>
+        </a>
+        <div class="divider"></div>
+    </div>
+</div>
+<div class="ui dropdown item">
+    <i class="fa fa-unlock" aria-hidden="true"> Calificacion</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/planAcademico">
+            <i class="fa fa-cogs" aria-hidden="true"> Gestionar</i>
+        </a>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-user-secret" aria-hidden="true"><%=user.nombre%></i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/actualizar">
+            <i class="fa fa-lock" aria-hidden="true"> Actualizar</i>
+        </a>
+        <div class="divider"></div>
+        <a class="item" aria-hidden="true" href="/registrar">
+            <i class="fa fa-user-plus" aria-hidden="true"> Registrar</i>
+        </a>
+        <div class="divider"></div>
+        <a class="item" aria-hidden="true" href="/salida">
+            <i class="sign out small icon"> Salir</i>
+        </a>
+    </div>
+</div>
+<%} else if (user.role === 'CONTROLESCOLAR') {%>
+<div class="ui dropdown item">
+    <i class="fa fa-book" aria-hidden="true"> Alumno</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/listaAlumno">
+            <i class="fa fa-cogs" aria-hidden="true"> Buscar por grupo</i>
+        </a>
+        <a class="item" aria-hidden="true" href="/buscarAlumno">
+            <i class="fa fa-cogs" aria-hidden="true"> Buscar por nombre</i>
+        </a>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-book" aria-hidden="true"> Trabajador</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/listaMaestro">
+            <i class="fa fa-cogs" aria-hidden="true"> Maestro</i>
+        </a>
+        <div class="divider"></div>
+        <a class="item" aria-hidden="true" href="/listaControl">
+            <i class="fa fa-cogs" aria-hidden="true"> Control Escolar</i>
+        </a>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-book" aria-hidden="true"> Materia</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/registrarMateria">
+            <i class="fa fa-cogs" aria-hidden="true"> Gestionar</i>
+        </a>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-unlock" aria-hidden="true"> Calificacion</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/planAcademico">
+            <i class="fa fa-cogs" aria-hidden="true"> Gestionar</i>
+        </a>
+        <div class="divider"></div>
+        <a class="item" aria-hidden="true" href="/publicarNotas">
+            <i class="fa fa-eye" aria-hidden="true"> Publicar</i>
+        </a>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-cog" aria-hidden="true"><%=user.nombre%></i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/actualizar">
+            <i class="fa fa-lock" aria-hidden="true"> Actualizar</i>
+        </a>
+        <div class="divider"></div>
+        <a class="item" aria-hidden="true" href="/registrar">
+            <i class="fa fa-user-plus" aria-hidden="true"> Registrar</i>
+        </a>
+        <div class="divider"></div>
+        <a class="item" aria-hidden="true" href="/salida">
+            <i class="sign out small icon"> Salir</i>
+        </a>
+    </div>
+</div>
+<%} else if (user.role === 'MAESTRO') {%>
+
+<div class="ui dropdown item">
+    <i class="fa fa-book" aria-hidden="true"> Asignar Calificación</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/asignarCalificacion">
+            <i class="fa fa-cogs" aria-hidden="true"> Gestionar</i>
+        </a>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-book" aria-hidden="true"> Ver detalles de Notas </i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/detalleCalificacion">
+            <i class="fa fa-cogs" aria-hidden="true"> Gestionar</i>
+        </a>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-id-badge" aria-hidden="true"> <%=user.nombre%></i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/actualizar">
+            <i class="fa fa-lock" aria-hidden="true"> Actualizar</i>
+        </a>
+        <div class="divider"></div>
+        <a class="item" aria-hidden="true" href="/salida">
+            <i class="sign out small icon"> Salir</i>
+        </a>
+    </div>
+</div>
+
+<%} else if (user.role === 'ALUMNO') {%>
+<div class="ui dropdown item">
+    <i class="fa fa-book" aria-hidden="true">Calificaciones</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/verMisCalificaciones">
+            <i class="fa fa-cogs" aria-hidden="true"> Gestionar</i>
+        </a>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-book" aria-hidden="true"> Materias</i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/verMisMaterias">
+            <i class="fa fa-cogs" aria-hidden="true"> Gestionar</i>
+        </a>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<div class="ui dropdown item">
+    <i class="fa fa-graduation-cap" aria-hidden="true"><%=user.nombre%></i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        <a class="item" aria-hidden="true" href="/actualizar">
+            <i class="fa fa-lock" aria-hidden="true"> Actualizar</i>
+        </a>
+        <div class="divider"></div>
+        <a class="item" aria-hidden="true" href="/salida">
+            <i class="sign out small icon"> Salir</i>
+        </a>
+    </div>
+</div>
+<%}%>

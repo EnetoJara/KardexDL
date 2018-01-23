@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <%include ../nav%>
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui container">
+               <h1 class="ui center aligned header" style="padding-top: 15px;padding-bottom: 15px;">Lista de Materias del Semestre</h1>
+            </div>
+            <div class="ui text container">
+                <div class="ui segments">
+                    <%if(message.length>0){%>
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            <%=message%>
+                        </div>
+                    </div>
+                    <%} else if(er.length>0){%>
+                    <div class="ui negative message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            <%=er%>
+                        </div>
+                    </div>
+                    <%}%>
+                    <form id="verAsigForm" class="ui form" method="post" action="/planAcademico">
+                        <div class="ui segment">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label class="ui blue label">Carrera *</label>
+                                    <select id="verAsigCarrera" name="verAsigCarrera" class="ui fluid search dropdown">
+                                       <option value="">CARRERAS</option>
+                                        <%if (data.CARRERAS.length > 0) {%>
+                                            <%if (user.role === 'CONTROLESCOLAR') {%>
+                                                <%for (var c = 0; c < data.CARRERAS.length; c++) {%>
+                                                    <%if (user.idCarrera === data.CARRERAS[c].ID) {%>
+                                                    <option selected value="<%=data.CARRERAS[c].ID%>"><%=data.CARRERAS[c].NOMBRE%></option>
+                                                    <%break;}%>
+                                                <%}%>
+                                            <%} else {%>
+                                            <%for (var c = 0; c < data.CARRERAS.length; c++) {%>
+                                                <option value="<%=data.CARRERAS[c].ID%>"><%=data.CARRERAS[c].NOMBRE%></option>
+                                            <%}%>
+                                        <%}}%>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label class="ui blue label">Turno *</label>
+                                    <select id="verAsigTurno" name="verAsigTurno" class="ui fluid search dropdown">
+                                        <option value="">TURNOS</option>
+                                        <%if (data.TURNOS.length > 0) {%>
+                                            <%for (var t = 0; t < data.TURNOS.length; t++) {%>
+                                                <option value="<%=data.TURNOS[t].ID%>"><%=data.TURNOS[t].NOMBRE%></option>
+                                            <%}%>
+                                        <%}%>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="two fields">
+                                <div class="field">
+                                    <label class="ui blue label">Semestre *</label>
+                                    <select id="verAsigSemestre" name="verAsigSemestre" class="ui fluid search dropdown">
+                                        <option value="">SEMESTRES</option>
+                                        <%if (data.SEMESTRES.length > 0) {%>
+                                            <%for (var s = 0; s < data.SEMESTRES.length; s++) {%>
+                                                <option value="<%=data.SEMESTRES[s].ID%>"><%=data.SEMESTRES[s].NOMBRE%></option>
+                                            <%}%>
+                                        <%}%>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label">Ciclos *</label>
+                                    <select id="verAsigCiclo" name="verAsigCiclo" class="ui fluid search dropdown">
+                                        <option value="">CICLO ACTUAL</option>
+                                        <%if (data.CICLOS.length > 0) {%>
+                                            <%if (user.role === 'ADMIN') {%>
+                                                <%for (var s = 0; s < data.CICLOS.length; s++) {%>
+                                                    <option value="<%=data.CICLOS[s].ID%>"><%=data.CICLOS[s].NOMBRE%></option>
+                                                <%}%>
+                                            <%} else {%>
+                                                <%for (var s = 0; s < data.CICLOS.length; s++) {%>
+                                                    <option value="<%=data.CICLOS[s].ID%>"><%=data.CICLOS[s].CODIGO%></option>
+                                                <%}%>
+                                            <%}%>
+                                        <%}%>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="Updatetsubmit" class="inline field">
+                                <div class="ui fluid large blue submit button">Buscar Materias de Semestre</div>
+                            </div>
+                            <div class="ui message error"></div>
+                        </div>
+                    </form>
+                    <div class="ui text conatiner" style="padding-top:15px;padding-bottom:15px;">
+                <table class="ui celled center aligned table">
+                    <thead>
+                        <th>ID</th>
+                        <th>MAESTRO</th>
+                        <th>MATERIA</th>
+                        <th>TURNO</th>
+                        <th>SEMESTRE</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <%include ../footer%>
+    </footer>
+    </body>
+
+
+</html>

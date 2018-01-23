@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+    <%include ../nav%>
+            <div class="pusher" style="background-color: #DADADA">
+               <div class="ui text container">
+                    <div class="ui large secondary pointing menu" style="background-color: #fff">
+                        <a class="toc item">
+                            <i class="sidebar icon"></i> MENU
+                        </a>
+                        <%include ../navegador%>
+                    </div>
+                </div>
+                <div class="ui container" style="padding-top:15px;">
+                    <h1 class="ui center aligned header">Registrar Carrera</h1>
+                </div>
+                <div class="ui text container">
+                    <div class="ui segments">
+                        <%if(message.length>0){%>
+                            <div class="ui info message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=message%>
+                                </div>
+                            </div>
+                            <%} else if(er.length>0){%>
+                                <div class="ui negative message">
+                                    <i class="close icon"></i>
+                                    <div class="header">
+                                        <%=er%>
+                                    </div>
+                                </div>
+                                <%}%>
+                                    <form id="carreraForm" name="carreraForm" class="ui form blue" method="post" action="/registrarCarrera">
+                                        <div class="ui segment">
+                                            <div class="three fields">
+                                                <div class="field">
+                                                    <label class="ui blue label">Nombre *</label>
+                                                    <input id="inputNombreCarrera" placeholder="Nombre Carrera" name="inputNombreCarrera" type="text" autocomplete="off">
+                                                </div>
+                                                <div class=field>
+                                                <label class="ui blue label">Ciclo Actual</label>
+                                                <select id="intpuCicloCarrera" class="ui fluid search dropdown" name="intpuCicloCarrera">
+                                                    <option value="">CICLOS</option>
+                                                    <%if (data.CICLOS.length > 0) {%>
+                                                    <%for (var c = 0; c < data.CICLOS.length; c++) {%>
+                                                    <option value="<%=data.CICLOS[c].ID%>"><%=data.CICLOS[c].NOMBRE%></option>
+                                                    <%}%>
+                                                    <%}%>
+                                                </select>
+                                            </div>
+                                                <div class="field">
+                                                    <label class="ui blue label">Modificador *</label>
+                                                    <input disabled id="inputNombreCarrera" placeholder="Nombre Carrera" name="inputNombreCarrera" type="text" value="Nombre: (<%=user.nombre%>) role: (<%=user.role%>) usuario: (<%=user.usuario%>)" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="Updatetsubmit" class="inline field">
+                                            <div class="ui fluid large blue submit button">Registrar</div>
+                                        </div>
+                                        <div class="ui message error"></div>
+                                    </form>
+                                    <div class="ui container">
+                                        <h2 class="ui center aligned header">Lista de Carreras</h2>
+                                    </div>
+                                    <div class="ui container">
+                                        <div class="ui segments">
+                                            <table class="ui striped center aligned table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>NOMBRE</th>
+                                                        <th>ACTIVA</th>
+                                                        <th>CREADOR/MODIFICADOR</th>
+                                                        <th>CREADA</th>
+                                                        <th>ACCIONES</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <%for (var i = 0; i<data.CARRERAS.length; i++) {%>
+                                                        <tr>
+                                                            <td class="id">
+                                                                <%=data.CARRERAS[i].ID%>
+                                                            </td>
+                                                            <td>
+                                                                <%=data.CARRERAS[i].NOMBRE%>
+                                                            </td>
+                                                            <td>
+                                                                <%=data.CARRERAS[i].VALIDO%>
+                                                            </td>
+                                                            <td>
+                                                                <%=data.CARRERAS[i].EDITOR%>
+                                                            </td>
+                                                            <td>
+                                                                <%=data.CARRERAS[i].CREADO%>
+                                                            </td>
+                                                            <%if (data.CARRERAS[i].VALIDO === 'Y') {%>
+                                                            <td class="positive">
+                                                                <a class="ui button basic icon btn-Eliminar" href='#' data-tooltip='Desactivar' data-position='top center' data-inverted=''>
+                                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                                </a>
+                                                                <a class="ui button basic icon" href='/editarCarrera/<%=data.CARRERAS[i].ID%>' data-tooltip='Editar' data-position='top center' data-inverted=''>
+                                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                                </a>
+                                                            </td>
+                                                            <%} else {%>
+                                                            <td class="negative">
+                                                                <a class="ui button basic icon btn-Activar" href='#' data-tooltip='Activar' data-position='top center' data-inverted=''>
+                                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <%}}%>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                    </div>
+                </div>
+            </div>
+        <footer>
+            <%include ../footer%>
+        </footer>
+</body>
+
+</html>

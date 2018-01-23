@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <%include ../nav%>
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+
+                <div class="ui text container">
+                    <div class="ui large secondary pointing menu" style="background-color: #fff">
+                        <a class="toc item">
+                            <i class="sidebar icon"></i> MENU
+                        </a>
+                            <%include ../navegador%>
+                    </div>
+                </div>
+
+                <div class="ui text container">
+                    <div class="ui container" style="padding-top:15px;">
+                        <h1 class="ui center aligned header">Mostrar Grupo</h1>
+                    </div>
+                    <div class="ui text container">
+                    <div class="ui segments">
+                    <%if(message.length>0){%>
+                        <div class="ui info message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=message%>
+                                </div>
+                            </div>
+                    <%} else if(er.length>0){%>
+                        <div class="ui negative message">
+                            <i class="close icon"></i>
+                            <div class="header"><%=er%></div>
+                        </div>
+                    <%}%>
+                    <form id="listaAlumnoForm" class="ui form blue" method="post" action="/listaAlumno">
+                        <div class="two fields">
+                            <div class="field">
+
+                                    <label class="ui blue label">Semestre *</label>
+                                    <div class="ui selection dropdown">
+                                        <input id="selectAlumnoSemestre" type="hidden" name="selectAlumnoSemestre">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">SEMESTRE</div>
+                                            <div class="menu">
+                                            <%for (var i = 0; i<data.SEMESTRES.length; i++) {%>
+                                                <div class="item" data-value="<%=data.SEMESTRES[i].ID%>">
+                                                    <%=data.SEMESTRES[i].NOMBRE%>
+                                                </div>
+                                            <%}%>
+                                            </div>
+                                    </div>
+
+                            </div>
+                            <div class="field">
+
+                                    <label class="ui blue label">Turno *</label>
+                                    <div class="ui selection dropdown">
+                                        <input id="selectAlumnoTurno" type="hidden" name="selectAlumnoTurno">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">TURNO</div>
+                                            <div class="menu">
+                                                <%for (var i = 0; i<data.TURNOS.length; i++) {%>
+                                                    <div class="item" data-value="<%=data.TURNOS[i].ID%>">
+                                                        <%=data.TURNOS[i].NOMBRE%>
+                                                    </div>
+                                                <%}%>
+                                            </div>
+                                    </div>
+
+                            </div>
+                        </div>
+                            <div class="inline field">
+                                <div class="ui fluid large blue submit button">Mostrar Grupo</div>
+                            </div>
+                            <div class="ui message error"></div>
+                    </form>
+                    </div>
+                    <div class="ui container">
+                            <table class="ui celled center aligned table">
+                                <thead>
+                                    <tr>
+                                        <th>Matricula</th>
+                                        <th>Nombre</th>
+                                        <th>Segundo Nombre</th>
+                                        <th>Apellido Paterno</th>
+                                        <th>Apellido Materno</th>
+                                        <th>ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%if (data.ALUMNOS.length) {%>
+                                        <%for (var a = 0; a < data.ALUMNOS.length; a++) {%>
+                                            <tr class="row_alumno">
+                                                <td class="id"><a class="item" aria-hidden="true" href="/alumno/<%=data.ALUMNOS[a].MATRICULA%>"><%=data.ALUMNOS[a].MATRICULA%></a></td>
+                                                <td><%=data.ALUMNOS[a].NOMBRE%></td>
+                                                <td><%=data.ALUMNOS[a].SEGUNDO_NOMBRE%></td>
+                                                <td><%=data.ALUMNOS[a].PATERNO%></td>
+                                                <td><%=data.ALUMNOS[a].MATERNO%></td>
+                                                <%if (data.ALUMNOS[a].VALIDO === 'Y') {%>
+                                                    <td class="positive fluid">
+                                                        <a class="ui button basic icon btn-Del-Alumno" href='#' data-tooltip='Desactivar' data-position='top center' data-inverted=''>
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </a>
+                                                        <a class="ui button basic icon" href='/<%=data.ALUMNOS[a].MATRICULA%>/calificaciones' data-tooltip='Calificaciones' data-position='top center' data-inverted=''>
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
+                                                <%} else {%>
+                                                    <td class="negative">
+                                                        <a class="ui button basic icon btn-Act-Alumno" href='#' data-tooltip='Activar' data-position='top center' data-inverted=''>
+                                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
+                                                <%}%>
+                                            </tr>
+                                        <%}%>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+
+                </div>
+                </div>
+        </div>
+    </div>
+    <footer>
+            <%include ../footer%>
+        </footer>
+</body>
+
+
+</html>

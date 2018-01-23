@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <%include ../nav%>
+
+        <div class="pusher" style="background-color: #DADADA">
+            <div class="ui container">
+                        <div class="ui text container">
+                            <div class="ui large secondary pointing menu" style="background-color: #fff">
+                                <a class="toc item">
+                                    <i class="sidebar icon"></i> MENU
+                                </a>
+                                <%include ../navegador%>
+                            </div>
+                        </div>
+                <!--MAIN VIEW--->
+                    <div class="ui container" style="padding-top:15px;">
+                    <h1 class="ui center aligned header">Editar Materia</h1>
+                </div>
+                <div class="ui text container">
+                    <div class="ui segments">
+                        <%if(message.length>0){%>
+                            <div class="ui info message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=message%>
+                                </div>
+                            </div>
+                            <%} else if(er.length>0){%>
+                                <div class="ui negative message">
+                                    <i class="close icon"></i>
+                                    <div class="header">
+                                        <%=er%>
+                                    </div>
+                                </div>
+                                <%}%>
+                                    <form id="registerForm" class="ui form" method="post" action="/editarMateria">
+                                        <div class="three fields">
+                                            <div class="field">
+                                             <label class="ui label blue">Nombre *</label>
+                                                <input type="text" id="inputMateriaNombreForm" name="inputMateriaNombreForm" placeholder="NOMBRE" value="<%=data.MATERIA[0].NOMBRE%>"/>
+                                            </div>
+                                                <input type="text" hidden id="editMateId" name="editMateId" value="<%=data.MATERIA[0].MATERIA_ID%>"/>
+                                                <div class="field">
+                                                    <label class="ui label blue">Semestre *</label>
+                                                    <div class="ui selection dropdown">
+                                                        <input id="selectMateriaSemestre" type="hidden" name="selectMateriaSemestre" value="<%=data.MATERIA[0].SEMESTRE_ID%>">
+                                                        <i class="dropdown icon"></i>
+                                                        <div class="default text">SEMESTRE</div>
+                                                        <div class="menu">
+                                                            <%for (var i = 0; i<data.DEFAULTS.SEMESTRES.length; i++) {%>
+                                                                <div class="item" data-value="<%=data.DEFAULTS.SEMESTRES[i].ID%>">
+                                                                    <%=data.DEFAULTS.SEMESTRES[i].NOMBRE%>
+                                                                </div>
+                                                                <%}%>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <div class="field">
+                                             <label class="ui label blue">Carrera *</label>
+                                                <input id="inputCarreraMateriaForm" name="inputCarreraMateriaForm" placeholder="CARRERA" type="text" value="<%=user.carrera%>" disabled/>
+                                            </div>
+                                        </div>
+                                            
+                                        <div id="Updatetsubmit" class="inline field">
+                                            <div class="ui fluid large blue submit button">Editar</div>
+                                        </div>
+                                        <div class="ui message error"></div>
+                                    </form>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <%include ../footer%>
+        </footer>
+</body>
+
+
+</html>

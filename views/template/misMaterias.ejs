@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+    <%include ../nav%>
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui two columns centered grid">
+                <div class="column">
+                    <div class="ui large secondary pointing menu" style="background-color: #fff">
+                        <a class="toc item"><i class="sidebar icon"></i> MENU</a>
+                        <%include ../navegador%>
+                    </div>
+                </div>
+            </div>
+            <div class="ui text container" style="padding-top:15px;padding-bottom:15px;">
+                <h1 class="ui center aligned header">Mis Materias</h1>
+            </div>
+            <div class="ui text container">
+                <div class="ui segments">
+                    <div class="ui segment">
+                        <form class="ui form">  
+                            <div class="three fields">
+                                <div class="field">
+                                    <label class="ui blue label">Matricula</label>
+                                    <div class="ui yellow message centered"><%=data[0].MATRICULA%></div>
+                                    </div>
+                                <div class="field">
+                                    <label class="ui blue label">Nombre</label>
+                                    <div class="ui yellow message centered"><%=data[0].ALUMNO%></div>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label">Carrera</label>
+                                    <div class="ui yellow message centered"><%=data[0].CARRERA%></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ui segment">
+                        <table class="ui definition celled right aligned table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>ID</th>
+                                    <th>Semestre</th>
+                                    <th>Turno</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for (var i = 0; i < data.length; i++) {%>
+                                <tr>
+                                    <td class="center aligned"><%=data[i].MATERIA%></td>
+                                    <td><%=data[i].ID%></td>
+                                    <td><%=data[i].SEMESTRE%></td>
+                                    <td><%=data[i].TURNO%></td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <%include ../footer%>
+    </footer>
+    </body>
+
+
+</html>

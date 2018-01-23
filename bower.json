@@ -1,0 +1,37 @@
+{
+    "name": "undel",
+    "description": "",
+    "main": "",
+    "authors": [
+    "Ernesto Jara Olveda <ernesto.jara@ibm.com>"
+  ],
+    "license": "MIT",
+    "homepage": "",
+    "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+    "dependencies": {
+        "font-awesome": "^4.7.0",
+        "semantic": "semantic-ui#^2.2.10"
+    },
+    "overrides": {
+        "font-awesome": {
+            "main": [
+                "less/font-awesome.less",
+                "css/font-awesome.min.css",
+                "scss/font-awesome.scss"
+            ]
+        },
+        "semantic": {
+            "main": [
+                "dist/semantic.min.css",
+                "dist/semantic.min.js"
+            ]
+        }
+    }
+}

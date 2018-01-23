@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+    <%include ../nav%>
+    <div class="pusher" style="background-color: #DADADA">
+        <div class="ui container">
+            <div class="ui text container">
+                <div class="ui large secondary pointing menu" style="background-color: #fff">
+                    <a class="toc item">
+                        <i class="sidebar icon"></i> MENU
+                    </a>
+                    <%include ../navegador%>
+                </div>
+            </div>
+            <div class="ui text container" style="padding-top:15px;">
+                <h1 class="ui center aligned header">Maestros Encontrados</h1>
+            </div>
+            
+            <div class="ui text container">
+                <div class="ui segments">
+                <%if(message.length>0){%>
+                    <div class="ui info message">
+                        <i class="close icon"></i>
+                            <div class="header">
+                                <%=message%>
+                            </div>
+                        </div>
+                    <%} else if(er.length>0){%>
+                        <div class="ui negative message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=er%>
+                            </div>
+                        </div>
+                    <%}%>
+                    <form id="maestroForm" class="ui form" method="post" action="/listaMaestro">
+                        <div class="ui segment">
+                            <div class="three fields">
+                                <div class="field">
+                                    <label class="ui yellow label">Num. Empleado</label>
+                                    <input tyep="text" name="maestroNum" id="maestroNum" placeholder="Numero de Empleado"/>
+                                </div>
+                                <div class="field">
+                                    <label class="ui blue label">Nombre *</label>
+                                    <input tyep="text" name="maestroNombre" id="maestroNombre" placeholder="Nombre"/>
+                                </div>
+                                <div class="field">
+                                    <label class="ui yellow label">Apellido</label>
+                                    <input tyep="text" name="maestroApellido" id="maestroApellido" placeholder="Apellido"/>
+                                </div>
+                            </div>
+                            <div class="inline field">
+                                <div class="ui fluid large blue submit button">Buscar Maestros</div>
+                            </div>
+                            <div class="ui message error"></div>
+                        </div>
+                    </form>
+                    <div class="ui segment">
+                        <table class="ui celled center aligned table">
+                            <thead>
+                                <th>ID</th>
+                                <th>Empleado</th>
+                                <th>Nombre</th>
+                                <th>Segundo</th>
+                                <th>Paterno</th>
+                                <th>Materno</th>
+                                <th>ACCIONES</th>
+                            </thead>
+                            <tbody>
+                            <%if (data.length > 0) {%>
+                                <%for (var m = 0; m < data.length; m++) {%>
+                                    <tr>
+                                        <td class="id"><%=data[m].ID%></td>
+                                        <td><%=data[m].USERNAME%></td>
+                                        <td><%=data[m].NOMBRE%></td>
+                                        <td><%=data[m].SNOMBRE%></td>
+                                        <td><%=data[m].APATERNO%></td>
+                                        <td><%=data[m].AMATERNO%></td>
+                                        <%if (data[m].VALIDO === 'Y') {%>
+                                        <td class="positive fluid">
+                                            <a class="ui button basic icon" href='/maestro/<%=data[m].USERNAME%>' data-tooltip='Editar' data-position='top center' data-inverted=''>
+                                                <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="ui button basic icon" href='/materias/<%=data[m].USERNAME%>' data-tooltip='Asignar Materia' data-position='top center' data-inverted=''>
+                                                <i class="fa fa-server" aria-hidden="true"></i>
+                                            </a>
+                                            <a class="ui button basic icon eli_maes" href='' data-tooltip='Dar de baja' data-position='top center' data-inverted=''>
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <%} else {%>
+                                        <td class="negative fluid">
+                                            <a class="ui button basic icon activar_maestro" href='' data-tooltip='Activar' data-position='top center' data-inverted=''>
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <%}%>
+                                    </tr>    
+                                <%}%>
+                            <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+<footer></footer>
+</body>
+</html>

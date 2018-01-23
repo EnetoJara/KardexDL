@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%include ../header%>
+</head>
+
+<body>
+
+
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="unedl ui image header">
+                <div class="content">PROMEDIO</div>
+            </h2>
+
+            <form class="ui large form" id="loginForm" method="post">
+
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <input type="text" name="va1" id="va1" placeholder="valor 1">
+                    </div>
+                    <div class="field">
+                        <input type="text" name="va2" id="va2" placeholder="valor 2">
+                    </div>
+                    <div class="field">
+                        <input type="text" name="va3" id="va3" placeholder="valor 3">
+
+                    </div>
+                    <div class="field">
+                        <input type="text" name="res4" id="res4" placeholder="Resultado jiji">
+
+                    </div>
+                    <div id="puchame" class="ui fluid large blue button">Promedio</div>
+                </div>
+                <div class="ui message error"></div>
+
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <script>
+            $(document).ready(function() {
+                $('#puchame').click(function() {
+                    var elemento = $(this);
+
+                    var va1 = parseFloat(elemento.parent().find('#va1').val());
+                    var va2 = parseFloat(elemento.parent().find('#va2').val());
+                    var va3 = parseFloat(elemento.parent().find('#va3').val());
+
+                    $.ajax({
+                        url: "http://localhost:5000/api/getPromedio",
+                        beforeSend: function(request) {
+                            request.setRequestHeader("Authorization", "Negotiate");
+                        },
+                        async: true,
+                        method: 'post',
+                        data: {
+                            va1: va1,
+                            va2: va2,
+                            va3: va3
+                        },
+                        success: function(data) {
+                            elemento.parent().find('#res4').val('EL resultado es: '+data);
+                        },
+                        error: function(xhr, textStatus, errorMessage) {
+                            alert('El WEB SERVICE NO está prendido jiji');
+                        }
+                    });
+                });
+            });
+
+        </script>
+        <%include ../footer%>
+    </footer>
+</body>
+
+
+</html>

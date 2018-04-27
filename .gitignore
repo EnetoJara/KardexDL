@@ -8,3 +8,4 @@
 client/_common/style.css
 **/.DS_Store
 /logs/
+package-lock.json

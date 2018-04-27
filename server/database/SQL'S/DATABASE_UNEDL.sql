@@ -2226,7 +2226,7 @@ VALUES ('Ingenieria de software II', now(), now(), 'Y', 1, 8, 'root-control'),
 ('Seminario de titulacion', now(), now(), 'Y', 1, 8, 'root-control');
 
 -- materias de derecho primer semestre
-insert into materia(nombre, creado, modificado, valido, editor, carrera_id, semestre_id)
+insert into MATERIA(nombre, creado, modificado, valido, editor, carrera_id, semestre_id)
 values('Metodología jurídica', now(), now(), 'Y', 'root', 2, 1),
 ('Introducción al estudio del Derecho', now(), now(), 'Y', 'root', 2, 1),
 ('Historia del Derecho', now(), now(), 'Y', 'root', 2, 1),
@@ -2235,8 +2235,8 @@ values('Metodología jurídica', now(), now(), 'Y', 'root', 2, 1),
 ('Lengua extranjera I', now(), now(), 'Y', 'root', 2, 1),
 ('Desarrollo integral', now(), now(), 'Y', 'root', 2, 1);
 
--- materias de derecho segundo semestre
-insert into materia(nombre, creado, modificado, valido, editor, carrera_id, semestre_id)
+-- MATERIAs de derecho segundo semestre
+insert into MATERIA(nombre, creado, modificado, valido, editor, carrera_id, semestre_id)
 values('Sociologia juridica', now(), now(), 'Y', 'root', 2, 2),
 ('Teoria del estado', now(), now(), 'Y', 'root', 2, 2),
 ('Teoria general del proceso', now(), now(), 'Y', 'root', 2, 2),
@@ -2245,8 +2245,8 @@ values('Sociologia juridica', now(), now(), 'Y', 'root', 2, 2),
 ('Lengua extranjera II', now(), now(), 'Y', 'root', 2, 2),
 ('Desarrollo integral', now(), now(), 'Y', 'root', 2, 2);
 
--- materias de derecho tercer semestre
-insert into materia(nombre, creado, modificado, valido, editor, carrera_id, semestre_id)
+-- MATERIAs de derecho tercer semestre
+insert into MATERIA(nombre, creado, modificado, valido, editor, carrera_id, semestre_id)
 values('Derecho constitucional', now(), now(), 'Y', 'root', 2, 3),
 ('Teoria de las obligaciones', now(), now(), 'Y', 'root', 2, 3),
 ('Derecho procesal civil', now(), now(), 'Y', 'root', 2, 3),

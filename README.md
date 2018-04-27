@@ -7,3 +7,7 @@ Password: Unedl-Admin
 UserName: root-control
 Password: Unedl-Control
 # KardexDL
+
+Run npm install
+Run npm install bower -g
+Run bower install
